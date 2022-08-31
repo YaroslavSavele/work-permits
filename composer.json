@@ -1,0 +1,6 @@
+{
+    "require": {
+        "codeception/codeception": "*",
+        "phpoffice/phpword": "^0.18.3"
+    }
+}
