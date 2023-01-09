@@ -10,14 +10,22 @@ $phpWord->setDefaultFontSize(14);
 
 $properties = $phpWord->getDocInfo();
 
+$setArray = ARRAY_STOCK_DEPARTAMENT;
+
 $date = date('d.m.Y');
-$company = EL_6;
+$company = $setArray['company'];
 $boss = PIROGOV;
-$allowing = MARATKANOV;
-$ppr = KRANES;
-$place = BAKE_7;
-$brigada = CRANE_REPAIRMEN;
+$allowing = $setArray['allowing'];
+$ppr = $setArray['ppr'];
+$place = $setArray['place'];
+$brigada = $setArray['brigada'];
 $count  = count($brigada);
+
+if ($company === EL_6) {
+    $superBoss = KOSHEEV;
+} else {
+    $superBoss = IVANOV;
+}
 //$properties->setCreator('My name');
 //$properties->setCompany('My factory');
 //$properties->setTitle('My title');
@@ -179,7 +187,7 @@ $section->addText("5. Наряд-допуск выдал ",
                     array('bold' => TRUE),
                     array('spaceAfter' => 20)
                 );
-$section->addText("Технический директор $company  Иванов С. И.__________________$date",
+$section->addText("$superBoss ____________$date",
                     array('underline' => 'single'),
                     array('align' => 'left', 'spaceAfter' => 5)
                 );              
@@ -323,7 +331,7 @@ foreach ($brigada as $employee) {
     }
     $table->addRow();
 $cell = $table->addCell(40)->addText($count, null, $cellHCentered);
-$cell = $table->addCell(6000)->addText($date);
+$cell = $table->addCell(6000)->addText("$date                        целевой инструктаж");
 $cell = $table->addCell(3000)->addText($employee);
 $cell = $table->addCell(2000)->addText($profession, null, $cellHCentered);
 $cell = $table->addCell(1500);
@@ -518,7 +526,29 @@ $section->addText("4.10 Мероприятия по охране труда: и�
                 );
 
 $section->addPageBreak();
-
+$section->addText("5. Наряд-допуск выдал ",
+                    array('bold' => TRUE),
+                    array('spaceAfter' => 20)
+                );
+$section->addText("$superBoss _____________$date",
+                    array('underline' => 'single'),
+                    array('align' => 'left', 'spaceAfter' => 5)
+                );              
+$section->addText("(должность, фамилия, подпись, дата)",
+                    array('size'=> 10,),
+                    array('align' => 'center', 'spaceAfter' => 20)
+                );                
+$section->addText("Вводный инструктаж по охране труда провел",
+                    //array(),
+                    //array('spaceAfter' => 20)
+                );                
+$section->addTextBreak();
+$section->addLine($lineStyle);                
+$section->addText("6. Мероприятия выполнил (выполнили): ",
+                    array('bold' => TRUE),
+                    array('spaceAfter' => 20)
+                );
+$section->addTextBreak();
 $table = $section->addTable('myTable');
 
 $table->addRow();
@@ -609,3 +639,15 @@ $section->addText("(должность, фамилия, подпись допу�
 
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 $objWriter->save('danger.docx');
+
+?>
+<ul class="menu">
+<li class="menu__item">
+<a href="index.php" class="menu__link">На главную</a>
+</li>
+<li class="menu__item">
+<a href="fire.php" class="menu__link">Наряд на огневые работы</a>
+</li>
+</ul>
+
+<h1 class="title">Создание наряда на работы повышенной опасности</h1>

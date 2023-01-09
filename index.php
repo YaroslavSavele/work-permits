@@ -68,4 +68,15 @@ $phpWord->addTitleStyle(6, $fontStyle);
 $section->addTitle('Title', 6);
 
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-$objWriter->save('doc.docx');
+$objWriter->save("D:\NetworkFolder\Рабочая документация\Наряды\Автоматические\$date.docx");
+?>
+<ul class="menu">
+<li class="menu__item">
+<a href="danger.php" class="menu__link">Наряд на работы повышенной опасности</a>
+</li>
+<li class="menu__item">
+<a href="fire.php" class="menu__link">Наряд на огневые работы</a>
+</li>
+</ul>
+
+<h1 class="title">Главная</h1>

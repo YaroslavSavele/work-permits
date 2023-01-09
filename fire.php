@@ -10,23 +10,21 @@ $phpWord->setDefaultFontSize(12);
 
 $properties = $phpWord->getDocInfo();
 
+$setArray = ARRAY_STOCK_DEPARTAMENT;
+
 $date = date('d.m.Y');
-$company = EL_6;
+$company = $setArray['company'];
 $boss = PIROGOV;
-$allowing = MARATKANOV;
-$ppr = FILTERS;
-$place = FILTER_BAKE_7;
-$brigada = BOBIN_TEAM;
-//$properties->setCreator('My name');
-//$properties->setCompany('My factory');
-//$properties->setTitle('My title');
-//$properties->setDescription('My description');
-//$properties->setCategory('My category');
-//$properties->setLastModifiedBy('My name');
-//$properties->setCreated(mktime(0, 0, 0, 3, 12, 2014));
-//$properties->setModified(mktime(0, 0, 0, 3, 14, 2014));
-//$properties->setSubject('My subject');
-//$properties->setKeywords('my, key, word');
+$allowing = $setArray['allowing'];
+$ppr = $setArray['ppr'];
+$place = $setArray['place'];
+$brigada = $setArray['brigada'];
+
+if ($company === EL_6) {
+    $superBoss = KOSHEEV;
+} else {
+    $superBoss = IVANOV;
+}
 
 
 $sectionStyle = array(
@@ -47,7 +45,7 @@ $section->addText(htmlspecialchars("УТВЕРЖДАЮ                ."),
                     array(),
                     array('align' => 'right', 'indentation' => 1000)
                 );
-$section->addText('Технический директор Иванов С. И.',
+$section->addText($superBoss,
                     array('underline' => 'single'),
                     array('align' => 'right', 'spaceAfter' => 10,)
                 );
@@ -303,3 +301,15 @@ ________________________________________________________________________________
 
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 $objWriter->save('fire.docx');
+
+?>
+<ul class="menu">
+<li class="menu__item">
+<a href="index.php" class="menu__link">На главную</a>
+</li>
+<li class="menu__item">
+<a href="danger.php" class="menu__link">Наряд на работы повышенной опасности</a>
+</li>
+</ul>
+
+<h1 class="title">Создание наряда на огневые работы</h1>
