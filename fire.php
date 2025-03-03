@@ -1,30 +1,67 @@
 <?php
 require_once("constants.php");
 require 'vendor/autoload.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наряд на огневые работы</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
 
 
+<?php 
+    
+    if ($_POST["date"] > 0) 
+    {
+        $date = date('d.m.Y', strtotime($_POST["date"]));
+?>      
+    <div class="container-fire">
+        <div class="mid">
+            <h1 class="title">Наряд на огневые работы успешно создан на дату <?= $date; ?></h1> 
+            <p class="disclaimer">
+                Распечатать наряд можно по адресу: <br>
+                D:\NetworkFolder\Рабочая документация\Наряды\Автоматические\Наряд на огневые работы <?= $date; ?>.docx
+            </p>
+        <?php
+            } else {
+            ?>    
+                <p class="fail">Введите дату на которую будет оформлятся наряд на огневые работы</p>
+                    
+            <?php } ?>
+        
+
+            <br>
+            <a class="return" href="index.php" class="menu__link">Вернуться к созданию нарядов</a>
+        </div>    
+    </div>    
+</body>
+</html>
+<?php
 $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
 $phpWord->setDefaultFontName('Times New Roman');
 $phpWord->setDefaultFontSize(12);
 
 $properties = $phpWord->getDocInfo();
+//===============================================================!!!!!!
+$setArray = ARRAY_REINFORCEMENT_METAL_STRUCTURES;
+//===============================================================!!!!!!!
+//$date = date('d.m.Y', strtotime("+1 days"));
+//$date = date('d.m.Y');
 
-$setArray = ARRAY_STOCK_DEPARTAMENT;
-
-$date = date('d.m.Y');
 $company = $setArray['company'];
-$boss = PIROGOV;
+$superBoss = $setArray['superboss'];
+$boss = $setArray['fire_boss'];
 $allowing = $setArray['allowing'];
 $ppr = $setArray['ppr'];
 $place = $setArray['place'];
 $brigada = $setArray['brigada'];
-
-if ($company === EL_6) {
-    $superBoss = KOSHEEV;
-} else {
-    $superBoss = IVANOV;
-}
 
 
 $sectionStyle = array(
@@ -41,7 +78,7 @@ $sectionStyle = array(
 $section = $phpWord->createSection($sectionStyle);
 
 $section->addText(htmlspecialchars($company));
-$section->addText(htmlspecialchars("УТВЕРЖДАЮ                ."),
+$section->addText(htmlspecialchars("НАРЯД ВЫДАЛ              ."),
                     array(),
                     array('align' => 'right', 'indentation' => 1000)
                 );
@@ -137,8 +174,8 @@ $count = 0;
 foreach ($brigada as $employee) {
     ++$count;
     $profession = 'монтажник';
-    if ($count === 1) {
-        $profession = 'эл. сварщик';
+    if ($count <= 2) {
+        $profession = 'электросварщик';
     }
     $table->addRow();
 $cell = $table->addCell(40)->addText($count, null, $cellHCentered);
@@ -155,9 +192,9 @@ $section->addText("Окончание _____время ___________дата");
 $section->addTextBreak();
 
 $section->addText('6. Меры по обеспечению пожарной безопасности места (мест) проведения
-работ: оградить зону производства работ, расчистить площадку от сгораемых материалов в радиусе 5 метров, огнетушитель – 2 шт., контроль места производства работ по окончанию выполнения работ в течении 3-х часов.');
+работ: провести инструктаж, оградить зону производства работ, расчистить площадку от сгораемых материалов в радиусе 5 метров, огнетушитель ОП-5 – 2 шт., контроль места производства работ по окончанию выполнения работ в течении 3-х часов.');
 $section->addTextBreak();
-$section->addText("7. Наряд-допуск выдан: $allowing $date _________",
+$section->addText("7. Допуск разрешаю: $allowing $date _________",
                     array('underline' => 'single'),
                     array('spaceAfter' => 5)
                 );
@@ -177,7 +214,7 @@ $section->addText('(подпись руководителя работ, дата
                     array(),
                     array('align' => 'center', 'spaceBefore' => 5,)
                 );
-$section->addText("Согласовано: СПАСР Эл 6 Челябинск ",
+$section->addText("Согласовано: СПАСР ООО «Донкарб Графит» ",
                     array('underline' => 'single'),
                     array()
                 );
@@ -232,7 +269,7 @@ $cell = $table->addCell(4000, $cellVCentered)->addText('подпись отве�
 $cell = $table->addCell(2000, $cellVCentered)->addText('дата, время', null, $cellHCentered);
 $cell = $table->addCell(3000, $cellVCentered)->addText('подпись руководителя работ', null, $cellHCentered);
 $i = 1;
-while ($i <= 10) {
+while ($i <= 7) {
 $table->addRow();
 $cell = $table->addCell(1000, $cellVCentered);
 $cell = $table->addCell(2000, $cellVCentered);
@@ -300,16 +337,6 @@ ________________________________________________________________________________
 ');
 
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-$objWriter->save('fire.docx');
+$objWriter->save("D:\NetworkFolder\Рабочая документация\Наряды\Автоматические\Наряд на огневые работы $place $date.docx");
 
 ?>
-<ul class="menu">
-<li class="menu__item">
-<a href="index.php" class="menu__link">На главную</a>
-</li>
-<li class="menu__item">
-<a href="danger.php" class="menu__link">Наряд на работы повышенной опасности</a>
-</li>
-</ul>
-
-<h1 class="title">Создание наряда на огневые работы</h1>
