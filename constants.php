@@ -68,6 +68,7 @@ const REPAIR_ROOF_MECHANICAL_PROCESSING_SECTION ='Текущий ремонт к
 const REPAIR_WALL_BOILER_HOUSE = 'Капитальный ремонт стенового ограждения с восточной стороны здания котельной №1 ППР №09-07/2024, договор: №Дог-ЧЛБ-2024/85 от «11» октября 2024 г.';
 const REINFORCEMENT_METAL_STRUCTURES = 'Усиление металлоконструкций здания прокалочного отделения в осях 16-18, А1-В1 блока №5 ППР №25-11/2024, договор: №Дог-ЧБЛ-2024/559 от «29» ноября 2024 г.';
 const REPLACEMENT_WALL_PANELS = 'Замена аварийных стеновых панелей в осях 9а-10а/А-Б здания СПО блока № 5 ППР №28-10/2024, договор: №ДогДКГ-2024/510 от 01.11.2024';
+const REPLACEMENT_ROOF_SLABS = 'Замена аварийных плит покрытия здания прокалочного отделения блока №5 в осях 17-18/Б-В, ППР №20-03/2025, гарантийное письмо: ДКГ-46/2025/295 от 20.03.2025';
 
 //Место place
 const BAKE_7 = 'пролет обжиговой печи №7 в отделении обжига блока №5 Эл 6 Челябинск';
@@ -92,7 +93,7 @@ const MECHANICAL_PROCESSING_SECTION = 'Кровля участка мех. об�
 //Бригада brigada
 const CRANE_REPAIRMEN = ['Бобин Н. П', 'Бояркин С. А.', 'Завьялов А. В',];
 const BOBIN_TEAM = ['Бобин Н. П', 'Безродных Ю. С.', 'Безродных И. С.', 'Вербицкий А. А.',];
-const PETRENKO_TEAM = [ 'Шкитов И. О.', 'Петренко А. И.', 'Кожевин А. Л.', 'Захаров А. С.', 'Кузнецов А. Е.'];
+const PETRENKO_TEAM = [ 'Шкитов И. О.', 'Петренко А. И.', 'Захаров А. С.', 'Кузнецов А. Е.'];
 const PIPES_TEAM = ['Петренко А. И.', 'Уткин А. В.', ' Шарыгин С. А.'];
 const MOGILNICOV_TEAM = ['Могильников А. В.', 'Шмыков М. Ю.', 'Гуркин Н. Н.'];
 const STRENGTHENING_TEAM = ['Петренко И. А.', 'Иванов А.В.','Кожевин А.Л.',];
@@ -103,19 +104,29 @@ const NOVOSIB_TEAM = ['Посторонко Е. В.', 'Дергалев М. В.'
 const EXTENDED_TEAM = [ 'Шкитов И. О.', 'Петренко А. И.','Хусаинов Р. М.', 'Кожевин А.Л.', 'Захаров А. С.', 'Ковалев Д. В.', 'Атаманенко Д. В.', ' ', ' ', ' ', ' ', ' ', ' ',];
 
 //Установочные массивы
-const ARRAY_REINFORCEMENT_METAL_STRUCTURES_NOVOSIB = [
-    'company' => STALMONTAZH,
-    'superboss' => STARKOV,
-    'danger_boss' => KURICIN,
-    'fire_boss' => KURICIN,
-    'allowing' => STARKOV,
-    'ppr' => REINFORCEMENT_METAL_STRUCTURES,
+const ARRAY_REPLACEMENT_ROOF_SLABS = [
+    'company' => DKB,
+    'superboss' => MARATKANOV,
+    'danger_boss' => PETRENKO,
+    'fire_boss' => STARKOV,
+    'allowing' => SHUVALOV,
+    'ppr' => REPLACEMENT_ROOF_SLABS,
     'place' => CALCINING,
-    'brigada' => NOVOSIB_TEAM,
+    'brigada' => PETRENKO_TEAM,
 ];
+//const ARRAY_REINFORCEMENT_METAL_STRUCTURES_NOVOSIB = [
+//    'company' => STALMONTAZH,
+//    'superboss' => STARKOV,
+//    'danger_boss' => KURICIN,
+//    'fire_boss' => KURICIN,
+//    'allowing' => STARKOV,
+//    'ppr' => REINFORCEMENT_METAL_STRUCTURES,
+//    'place' => CALCINING,
+//    'brigada' => NOVOSIB_TEAM,
+//];
 const ARRAY_REPLACEMENT_WALL_PANELS = [
     'company' => DKB,
-    'superboss' => MELNIKOV,
+    'superboss' => MARATKANOV,
     'danger_boss' => PETRENKO,
     'fire_boss' => STARKOV,
     'allowing' => SINEOKIY,
@@ -138,7 +149,7 @@ const ARRAY_WALL = [
     'superboss' => IVANOV,
     'danger_boss' => PETRENKO,
     'fire_boss' => STARKOV,
-    'allowing' => MASTER,
+    'allowing' => GISATULLIN,
     'ppr' => REPAIR_WALL_BOILER_HOUSE,
     'place' => BOILER_HOUSE,
     'brigada' => PETRENKO_TEAM,
